@@ -14,7 +14,7 @@ export const AuthScreen = ()=>{
         <div className="md:h-auto md:w-[420px]">
          { state === "signIn" ? <SignInCard setState={setState}/> :<SignUpCard setState={setState}/>}
         </div>
-        
+        <div> test</div>
         </div>
     )
 }
