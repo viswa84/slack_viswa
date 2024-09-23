@@ -4,28 +4,41 @@ import { auth } from "./auth";
 
 
 export const create = mutation({
-    args:{
-        name:v.string(),
+    args: {
+        name: v.string(),
     },
-    handler: async (ctx,args)=>{
+    handler: async (ctx, args) => {
         const userId = await auth.getUserId(ctx);
-        if(!userId){
+        if (!userId) {
             throw new Error("Unathorized")
         }
         //ToDO create a proper method latter
         const joinCode = "123456";
-         const WorkspaceId = await ctx.db.insert("workspaces",{
-            name:args.name,
+        const WorkspaceId = await ctx.db.insert("workspaces", {
+            name: args.name,
             userId,
             joinCode,
-         })
-         return WorkspaceId ;
+        })
+        return WorkspaceId;
     }
 })
 
-export const get=query({
-    args:{},
-    handler:async(ctx)=>{
+export const get = query({
+    args: {},
+    handler: async (ctx) => {
         return await ctx.db.query("workspaces").collect()
     }
+})
+
+export const getById = query({
+    args: { id: v.id("workspaces") },
+    handler: async (ctx, args) => {
+        const userId = await auth.getUserId(ctx);
+
+        if (!userId) {
+            throw new Error("Unauthorized")
+        }
+    
+        return await ctx.db.get(args.id)
+    },
 })
