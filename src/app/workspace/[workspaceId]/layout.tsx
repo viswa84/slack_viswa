@@ -2,7 +2,8 @@
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import Sidebar from "./Sidebar";
-import { Toolbar } from "./toolbar"
+import { Toolbar } from "./toolbar";
+import { WorkspaceSidebar } from "./wokspace-sidebar";
 
 interface WorkspaceIdLayoutProps {
     children: React.ReactNode
@@ -15,9 +16,7 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
                 <Sidebar />
                 <ResizablePanelGroup direction="horizontal" autoSaveId={"viswa-workspace-layout"}>
                     <ResizablePanel  defaultSize={20} minSize={11} className="bg-[#5e2c5f]">
-                        <div>
-                            channels Sidebar
-                        </div>
+                     <WorkspaceSidebar/>
                     </ResizablePanel>
                     <ResizableHandle withHandle/>
                     <ResizablePanel minSize={20}>
