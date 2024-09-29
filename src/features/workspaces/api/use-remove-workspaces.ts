@@ -3,7 +3,8 @@ import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-type RequestType = {name:string,} ;
+type RequestType = {
+    id:Id<"workspaces">} ;
 type ResposnseType = Id<"workspaces"> | null;
 
 type Options={
@@ -13,12 +14,12 @@ type Options={
     throwError?:boolean
 }
 
-export const useCreateWorkspace=()=>{
+export const useRemoveWorkspace=()=>{
 
 
     const [data,setData]=useState<ResposnseType>(null);
     const [error,setError]=useState<Error | null>(null);
-    const mutation = useMutation(api.workspaces.create);
+    const mutation = useMutation(api.workspaces.remove);
     const [status,setStatus]=useState<"success" | "error" | "settled" | "pending" | null >(null)
     
     // const[isPending,setIsPending]=useState(false)
