@@ -11,6 +11,7 @@ import { Doc } from "../../../../convex/_generated/dataModel";
 import { Hint } from "@/components/hint";
 import { PreferenceModal } from "./preferences-modal";
 import { useState } from "react";
+import { InviteModal } from "./invite-modal";
 
 interface WorkspaceHeaderProps {
     workspace: Doc<"workspaces">;
@@ -23,8 +24,15 @@ export const WorkspaceHeader = ({
 }: WorkspaceHeaderProps) => {
 
     const [prefererenencesOpen, setPrefencesOpen] = useState(false)
+    const [inviteOpen, setInviteOpen] = useState(false)
     return (
         <>
+            <InviteModal
+            open = {inviteOpen}
+            setOpen = {setInviteOpen}
+            name={workspace.name}
+            joinCode = {workspace.joinCode}
+            />
             <PreferenceModal
                 open={prefererenencesOpen}
                 setOpen={setPrefencesOpen}
@@ -57,7 +65,7 @@ export const WorkspaceHeader = ({
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     className="cursor-pointer py-2"
-                                    onClick={() => { }}
+                                    onClick={()=>{ setInviteOpen(true)}}
                                 >
                                     Invite people to {workspace.name}
                                 </DropdownMenuItem>
